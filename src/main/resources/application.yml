@@ -1,0 +1,24 @@
+server:
+  port: 8081
+name: qqchen2
+age: 26
+content: "name: ${name}, age: ${age}"
+student:
+  name: qqchen
+  age: 26
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/springboot?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123321
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.fif.springboot.mapper

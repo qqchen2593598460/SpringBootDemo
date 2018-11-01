@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fif.springboot.mapper.StudentMapper">
+    <resultMap id="studentResMap" type="com.fif.springboot.pojo.Student">
+        <id property="studentID" column="student_id"/>
+        <result property="studentName" column="student_name"/>
+        <result property="stuBirthday" column="student_birthday"/>
+        <result property="studentSex" column="student_sex"/>
+    </resultMap>
+    <!-- 根据id查询学生 -->
+    <select id="getStudent" parameterType="java.lang.String" resultType="com.fif.springboot.pojo.Student" resultMap="studentResMap" >
+        <![CDATA[
+           SELECT * FROM student_tbl st WHERE st.student_name = #{studentName}
+        ]]>
+    </select>
+    <insert id="insertStudent" parameterType="com.fif.springboot.pojo.Student">
+        INSERT INTO student_tbl (student_id,
+                  student_name,
+                  student_sex,
+                  student_birthday
+        ) VALUES (
+                  #{studentID},
+                  #{studentName},
+                  #{studentSex},
+                  #{stuBirthday}
+        )
+    </insert>
+    <select id="getStudentAll" resultMap="studentResMap">
+        SELECT
+	      *
+        FROM
+	      student_tbl;
+    </select>
+    <delete id="deleteStudent" >
+        DELETE FROM student_tbl WHERE student_id = #{studentID}
+    </delete>
+    <update id="updateStudent" parameterType="com.fif.springboot.pojo.Student">
+        UPDATE student_tbl st
+           SET st.student_name = #{studentName},
+               st.student_sex = #{studentSex},
+               st.student_birthday = #{stuBirthday}
+         WHERE st.student_id = #{studentID}
+    </update>
+</mapper>
